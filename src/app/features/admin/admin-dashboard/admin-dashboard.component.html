@@ -1,23 +1,62 @@
 <div class="dashboard-container">
-  <div class="glass-panel dashboard-panel">
+  <div class="glass-panel dashboard-panel neon-box-magenta">
     <div class="header">
-      <h2>Panel Administrativo - Docente</h2>
-      <button class="logout-btn" (click)="logout()">Cerrar Sesión</button>
+      <h2><span class="neon-text-magenta">ADMIN</span>_HUB</h2>
+      <button class="logout-btn neon-box-cyan" (click)="logout()">Desconectar</button>
     </div>
     
-    <div class="content">
-      <p>Bienvenido al panel administrativo. Aquí podrás gestionar estudiantes, cursos y ver estadísticas en el futuro.</p>
-      
-      <div class="cards">
-        <div class="card">
-          <h3>Estudiantes</h3>
-          <p>Gestionar registros (Próximamente)</p>
-        </div>
-        <div class="card">
-          <h3>Reportes</h3>
-          <p>Ver estadísticas (Próximamente)</p>
-        </div>
+    <div class="tabs">
+      <button class="tab-btn" [class.active]="activeView === 'results'" (click)="switchView('results')">
+        Resultados Estudiantes
+      </button>
+      <button class="tab-btn" [class.active]="activeView === 'content'" (click)="switchView('content')">
+        Revisión de Contenidos
+      </button>
+    </div>
+
+    <!-- Vista de Resultados -->
+    <div *ngIf="activeView === 'results'" class="view-content">
+      <h3 class="neon-text-cyan">Entregas Recientes</h3>
+      <table class="results-table">
+        <thead>
+          <tr>
+            <th>Estudiante</th>
+            <th>Fase</th>
+            <th>Puntaje</th>
+            <th>Fecha</th>
+            <th>Acción</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let sub of submissions">
+            <td>{{ sub.student }}</td>
+            <td>{{ sub.phase }}</td>
+            <td>
+              <span [class.neon-text-green]="sub.score !== null && sub.score >= 70" [class.neon-text-magenta]="sub.score !== null && sub.score < 70">
+                {{ sub.score !== null ? sub.score + '%' : 'Pendiente' }}
+              </span>
+            </td>
+            <td>{{ sub.submittedAt | date:'short' }}</td>
+            <td><button class="action-btn">Revisar</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Vista de Revisión de Contenido -->
+    <div *ngIf="activeView === 'content'" class="view-content">
+      <h3 class="neon-text-purple">Contenido: Fase 1 (Quiz Diagnóstico)</h3>
+      <div class="question-block" *ngFor="let q of questions; let i = index">
+        <p class="q-text">{{ i + 1 }}. {{ q.text }}</p>
+        <ul>
+          <li *ngFor="let opt of q.options; let optIndex = index" 
+              [class.correct-answer]="optIndex === q.correctIndex">
+            {{ opt }} <span *ngIf="optIndex === q.correctIndex">✅</span>
+          </li>
+        </ul>
+        <p class="feedback-text"><strong>Retroalimentación:</strong> {{ q.feedback }}</p>
       </div>
     </div>
+
   </div>
 </div>
