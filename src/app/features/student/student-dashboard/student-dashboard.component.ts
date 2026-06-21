@@ -33,21 +33,12 @@ export class StudentDashboardComponent implements OnInit {
 
   constructor(
     private authService: AuthService, 
-    private themeService: ThemeService,
     private router: Router
   ) {}
 
   ngOnInit() {
     this.challenge = HACKATON_DATA.challenge;
     this.phases = HACKATON_DATA.phases;
-    
-    this.themeService.theme$.subscribe(theme => {
-      this.currentTheme = theme;
-    });
-  }
-
-  toggleTheme() {
-    this.themeService.toggleTheme();
   }
 
   switchTab(tab: 'inicio' | 'fases') {

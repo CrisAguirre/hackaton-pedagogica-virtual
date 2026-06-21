@@ -23,18 +23,10 @@ export class AdminDashboardComponent implements OnInit {
 
   constructor(
     private authService: AuthService, 
-    private themeService: ThemeService,
     private router: Router
   ) {}
 
   ngOnInit() {
-    this.themeService.theme$.subscribe(theme => {
-      this.currentTheme = theme;
-    });
-  }
-
-  toggleTheme() {
-    this.themeService.toggleTheme();
   }
 
   logout() {

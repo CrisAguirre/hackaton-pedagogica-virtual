@@ -1,39 +1,37 @@
-<div class="login-container">
-  <div class="glass-panel login-panel neon-box-cyan">
-    <div class="login-header">
-      <h2>Bienvenido</h2>
-      <p>Hackaton Pedagógica Virtual</p>
+<div class="auth-container animate-fade-in">
+  <div class="auth-panel">
+    <div style="margin-bottom: 30px;">
+      <h2 style="color: var(--accent-primary); margin-bottom: 5px;">Bienvenido a</h2>
+      <h3 style="color: var(--text-white); font-weight: 700; font-size: 24px;">Tu simulador Phet</h3>
     </div>
     
     <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
-      <div class="input-group">
-        <label for="username">Usuario</label>
+      <div style="text-align: left; margin-bottom: 15px;">
         <input 
           type="text" 
           id="username" 
           name="username" 
           [(ngModel)]="credentials.username" 
           required
-          placeholder="Ingrese su usuario">
+          placeholder="Usuario">
       </div>
       
-      <div class="input-group">
-        <label for="password">Contraseña</label>
+      <div style="text-align: left; margin-bottom: 15px;">
         <input 
           type="password" 
           id="password" 
           name="password" 
           [(ngModel)]="credentials.password" 
           required
-          placeholder="Ingrese su contraseña">
+          placeholder="Contraseña">
       </div>
 
-      <div class="error-message" *ngIf="errorMessage">
+      <div *ngIf="errorMessage" style="color: var(--color-danger); margin-bottom: 20px; font-size: 14px;">
         {{ errorMessage }}
       </div>
 
-      <button type="submit" class="submit-btn" [disabled]="isLoading">
-        {{ isLoading ? 'Ingresando...' : 'Ingresar' }}
+      <button type="submit" class="btn-primary" [disabled]="isLoading">
+        {{ isLoading ? 'INGRESANDO...' : 'INICIAR SESIÓN' }}
       </button>
     </form>
   </div>

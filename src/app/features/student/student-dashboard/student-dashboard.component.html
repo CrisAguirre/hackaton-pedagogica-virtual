@@ -1,38 +1,36 @@
-<div class="dashboard-container">
-  <div class="glass-panel dashboard-panel neon-box-cyan">
+<div class="dashboard-container animate-fade-in">
+  <div class="auth-panel dashboard-panel">
     
     <!-- Top Navigation -->
     <div class="header">
-      <h2><span class="neon-text-cyan">HACKATON</span>_HUB</h2>
+      <h2><span style="color: var(--accent-primary);">Simulador</span> PHET</h2>
       
       <div class="nav-controls">
         <button class="tab-btn" [class.active]="activeTab === 'inicio'" (click)="switchTab('inicio')">Inicio</button>
-        <button class="tab-btn" [class.active]="activeTab === 'fases'" (click)="switchTab('fases')">Hackatón (Fases)</button>
+        <button class="tab-btn" [class.active]="activeTab === 'fases'" (click)="switchTab('fases')">Talleres</button>
       </div>
 
       <div class="user-controls">
-        <button class="theme-btn neon-box-cyan" (click)="toggleTheme()">
-          {{ currentTheme === 'dark' ? '🌞 Modo Día' : '🌙 Modo Noche' }}
-        </button>
-        <button class="logout-btn neon-box-magenta" (click)="logout()">Desconectar</button>
+        <span style="color: var(--text-muted); margin-right: 15px;">👤 Estudiante</span>
+        <button class="btn-primary" style="padding: 6px 12px; width: auto;" (click)="logout()">Salir</button>
       </div>
     </div>
     
     <!-- Tab: Inicio -->
-    <div *ngIf="activeTab === 'inicio'" class="inicio-tab">
-      <div class="challenge-banner neon-box-purple">
-        <h3 class="neon-text-magenta">Innovación Didáctica - Hackatón Pedagógica Virtual</h3>
+    <div *ngIf="activeTab === 'inicio'" class="inicio-tab animate-slide-down">
+      <div class="challenge-banner">
+        <h3 style="color: var(--accent-primary);">Innovación Didáctica - Hackatón Pedagógica Virtual</h3>
         <p>Bienvenido al espacio donde recibirás un reto pedagógico, consultarás referentes teóricos, diseñarás una solución didáctica y serás evaluado mediante quizzes interactivos ligados a cada fase.</p>
         <br>
         <p><strong>Principio integrador:</strong> Las 5 unidades del curso son esenciales para resolver la hackatón. No es un evento aislado: es la síntesis aplicada de todo el contenido de la asignatura.</p>
       </div>
-      <button class="submit-btn" (click)="switchTab('fases')">Ir a las Fases</button>
+      <button class="btn-primary" style="margin-top: 20px;" (click)="switchTab('fases')">Ir a los Talleres</button>
     </div>
 
     <!-- Tab: Fases -->
-    <div *ngIf="activeTab === 'fases'" class="fases-tab">
-      <div class="challenge-banner neon-box-purple">
-        <h3>RETO ASIGNADO: {{ challenge.title }}</h3>
+    <div *ngIf="activeTab === 'fases'" class="fases-tab animate-slide-down">
+      <div class="challenge-banner">
+        <h3 style="color: var(--accent-primary);">RETO ASIGNADO: {{ challenge.title }}</h3>
         <p>{{ challenge.description }}</p>
       </div>
 
@@ -42,7 +40,7 @@
              [class.locked]="phase.status === 'locked'"
              [class.unlocked]="phase.status === 'unlocked'"
              (click)="openPhase(phase)">
-          <div class="node-circle" [class.neon-box-green]="phase.status === 'unlocked'"></div>
+          <div class="node-circle"></div>
           <div class="node-title">{{ phase.title }}</div>
         </div>
       </div>
@@ -53,16 +51,16 @@
 
 <!-- Modal para Fase Activa -->
 <div class="phase-modal" *ngIf="selectedPhase">
-  <div class="glass-panel phase-content neon-box-cyan">
+  <div class="auth-panel phase-content animate-fade-in-up">
     <button class="close-btn" (click)="closePhase()">X</button>
-    <h2 class="neon-text-cyan">Fase {{ selectedPhase.id }}: {{ selectedPhase.title }}</h2>
+    <h2 style="color: var(--accent-primary); margin-bottom: 20px;">Taller {{ selectedPhase.id }}: {{ selectedPhase.title }}</h2>
     
-    <div class="phase-body">
+    <div class="phase-body" style="text-align: left;">
       
       <!-- Content: Info (Onboarding) -->
       <div *ngIf="selectedPhase.type === 'info'">
         <p>Bienvenido a la Hackatón. El objetivo es diseñar una solución didáctica innovadora basándote en las 5 unidades vistas. Tu reto ha sido asignado.</p>
-        <button class="submit-btn" style="margin-top:20px;" (click)="phases[1].status = 'unlocked'; closePhase()">Aceptar Reglas</button>
+        <button class="btn-primary" style="margin-top:20px;" (click)="phases[1].status = 'unlocked'; closePhase()">Iniciar Taller →</button>
       </div>
 
       <!-- Content: Quiz -->
@@ -79,7 +77,7 @@
               </button>
             </div>
           </div>
-          <button class="submit-btn" (click)="submitPhase()">Enviar Respuestas</button>
+          <button class="btn-primary" style="margin-top: 20px;" (click)="submitPhase()">Enviar Respuestas</button>
         </div>
       </div>
 
@@ -91,7 +89,7 @@
             <input type="checkbox" style="width:20px;height:20px;" [checked]="checklistAnswers[i]" (change)="toggleChecklist(i)">
             <label>{{ item.text }}</label>
           </div>
-          <button class="submit-btn" (click)="submitPhase()">Confirmar Checklist</button>
+          <button class="btn-primary" style="margin-top: 20px;" (click)="submitPhase()">Confirmar Checklist</button>
         </div>
       </div>
 
@@ -107,22 +105,21 @@
           
           <div class="input-group">
             <label>Descripción / Justificación</label>
-            <textarea [(ngModel)]="deliveryText" rows="5" style="width:100%; padding: 10px; background: rgba(0,0,0,0.5); color: inherit; border: 1px solid rgba(0,255,255,0.3); outline:none;" placeholder="Escribe tu justificación aquí..."></textarea>
+            <textarea [(ngModel)]="deliveryText" rows="5" style="width:100%; padding: 10px; background: var(--bg-dark); color: inherit; border: 1px solid var(--bg-medium); border-radius: 6px; outline:none;" placeholder="Escribe tu justificación aquí..."></textarea>
           </div>
 
-          <button class="submit-btn" (click)="submitPhase()">Entregar Propuesta</button>
+          <button class="btn-primary" style="margin-top: 20px;" (click)="submitPhase()">Entregar Propuesta</button>
         </div>
       </div>
 
       <!-- Common Results Block (shown after submit) -->
       <div *ngIf="phaseCompleted && selectedPhase.type !== 'info'" class="results-block" style="margin-top:30px;">
-        <h3 class="neon-text-green">¡Entregado! Puntaje: {{ score | number:'1.0-0' }}%</h3>
-        <p *ngIf="score !== null && score >= 70">Has completado la fase con éxito y desbloqueado la siguiente.</p>
-        <p *ngIf="score !== null && score < 70" style="color:var(--neon-magenta)">No has alcanzado el 70% necesario. ¡Intenta de nuevo!</p>
+        <h3 style="color: var(--color-success);">¡Entregado! Puntaje: {{ score | number:'1.0-0' }}%</h3>
+        <p *ngIf="score !== null && score >= 70">Has completado el taller con éxito y desbloqueado el siguiente.</p>
+        <p *ngIf="score !== null && score < 70" style="color:var(--color-danger)">No has alcanzado el 70% necesario. ¡Intenta de nuevo!</p>
         
-        <!-- Feedback specifically for Quizzes -->
         <div *ngIf="selectedPhase.type === 'quiz'">
-          <div class="feedback-item" *ngFor="let q of questions; let i = index">
+          <div class="feedback-item" *ngFor="let q of questions; let i = index" style="margin-top: 10px; background: var(--bg-dark); padding: 10px; border-radius: 6px;">
             <p><strong>P {{ i+1 }}:</strong> {{ q.feedback }}</p>
           </div>
         </div>
