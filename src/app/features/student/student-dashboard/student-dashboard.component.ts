@@ -27,6 +27,15 @@ export class StudentDashboardComponent implements OnInit {
   // Menu State
   isMobileMenuOpen = false;
   isModulesDropdownOpen = false;
+  isDocModalOpen = false;
+
+  openDocModal() {
+    this.isDocModalOpen = true;
+  }
+
+  closeDocModal() {
+    this.isDocModalOpen = false;
+  }
 
   toggleMobileMenu() {
     this.isMobileMenuOpen = !this.isMobileMenuOpen;

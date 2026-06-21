@@ -294,6 +294,64 @@
   {{ toastMessage }}
 </div>
 
+<!-- Floating Button for Document -->
+<button *ngIf="activeView === 'content' && selectedPhase?.type === 'info'" 
+        style="position: fixed; bottom: 80px; right: 20px; background: var(--accent-primary); color: var(--bg-darkest); border: none; border-radius: 50px; padding: 15px 25px; box-shadow: var(--glow-blue-strong); cursor: pointer; z-index: 100; font-weight: 800; display: flex; align-items: center; gap: 10px; transition: 0.3s; font-family: var(--font-primary);"
+        (click)="openDocModal()">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+  Ver Documento
+</button>
+
+<!-- Document Modal Overlay -->
+<div *ngIf="isDocModalOpen" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.85); z-index: 9999; display: flex; justify-content: center; align-items: center;" (click)="closeDocModal()">
+  <div class="animate-fade-in-up" style="background: var(--bg-card); width: 90%; max-width: 800px; max-height: 85vh; border-radius: 12px; box-shadow: var(--shadow-card); border-top: 4px solid var(--accent-primary); display: flex; flex-direction: column; overflow: hidden;" (click)="$event.stopPropagation()">
+    
+    <!-- Modal Header -->
+    <div style="padding: 20px; border-bottom: 1px solid var(--bg-medium); display: flex; justify-content: space-between; align-items: center; background: rgba(6,13,26,0.5);">
+      <h3 style="color: var(--text-white); margin: 0; display: flex; align-items: center; gap: 10px;">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent-primary)" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+        Recurso Pedagógico
+      </h3>
+      <button style="background: transparent; border: none; color: var(--text-muted); font-size: 24px; cursor: pointer; transition: 0.2s;" (click)="closeDocModal()">&times;</button>
+    </div>
+    
+    <!-- Download Button Section -->
+    <div style="padding: 20px; text-align: center; background: var(--bg-dark); border-bottom: 1px solid var(--bg-medium);">
+      <p style="color: var(--text-light); margin-bottom: 15px; font-size: 14px;">Descarga el documento completo en formato Word para su revisión o entrega.</p>
+      <a href="assets/Recurso_Pedagogico_Hackaton_Innovacion_Didactica.docx" download class="btn-primary" style="text-decoration: none; display: inline-flex; align-items: center; gap: 8px; max-width: 320px; justify-content: center;">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+        Descargar Documento (Word)
+      </a>
+    </div>
+
+    <!-- Modal Scrollable Content -->
+    <div style="padding: 30px; overflow-y: auto; color: var(--text-light); font-size: 15px; line-height: 1.7; text-align: left;">
+      <h2 style="color: var(--accent-primary); margin-bottom: 5px;">Plataforma Web de Hackatón Pedagógica Virtual</h2>
+      <h4 style="color: var(--text-muted); margin-bottom: 30px;">Actividad 1 — Asignatura: Innovación Didáctica</h4>
+
+      <h3 style="color: var(--text-white); margin-top: 20px; margin-bottom: 10px;">Introducción</h3>
+      <p>La innovación didáctica exige a los docentes en formación renovar sus prácticas pedagógicas mediante el uso pertinente de recursos, estrategias y tendencias digitales. Esta plataforma web se ha construido específicamente para alojar, gestionar y evaluar la experiencia completa de la hackatón pedagógica, superando las limitaciones funcionales o de personalización de herramientas gratuitas preexistentes.</p>
+
+      <h3 style="color: var(--text-white); margin-top: 20px; margin-bottom: 10px;">1. Objetivos</h3>
+      <ul style="padding-left: 20px; margin-bottom: 20px; color: var(--text-muted);">
+        <li>Diseñar e implementar una aplicación web propia que funcione como espacio educativo integral.</li>
+        <li>Estructurar el contenido pedagógico en fases secuenciales articuladas con las 5 unidades.</li>
+        <li>Diseñar un sistema de evaluación interactivo basado en quizzes, listas de verificación y rúbricas.</li>
+      </ul>
+
+      <h3 style="color: var(--text-white); margin-top: 20px; margin-bottom: 10px;">2. Metodología</h3>
+      <p>Se adopta un enfoque centrado en el <strong>Aprendizaje Basado en Proyectos (ABPr)</strong>, complementado con el <strong>ABP</strong> (Problemas) y el <strong>ABC</strong> (Casos). La arquitectura tecnológica desacoplada (Angular, Node.js, MongoDB) garantiza la trazabilidad real de los datos académicos y un control total sobre el diseño pedagógico.</p>
+
+      <h3 style="color: var(--text-white); margin-top: 20px; margin-bottom: 10px;">3. Recursos</h3>
+      <p>La plataforma integra infografías propias, bancos de preguntas (quizzes) interactivos y herramientas tecnológicas de última generación para modelar una verdadera integración TIC bajo el modelo <strong>TPACK</strong>.</p>
+
+      <h3 style="color: var(--text-white); margin-top: 20px; margin-bottom: 10px;">5. Evaluación</h3>
+      <p>La estrategia se diseñó bajo el principio de evaluación auténtica y formativa, articulando mecanismos de autoevaluación progresiva durante el desbloqueo de módulos en la Hackatón, con una evaluación sumativa final a cargo del docente tutor.</p>
+    </div>
+
+  </div>
+</div>
+
 <!-- Zoom Modal Overlay (Must be outside of transform containers) -->
 <div *ngIf="zoomedImageUrl" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.85); z-index: 9999; display: flex; justify-content: center; align-items: center; cursor: zoom-out;" (click)="closeZoom()">
   <button style="position: absolute; top: 20px; right: 20px; background: rgba(255, 255, 255, 0.1); border: none; color: white; width: 40px; height: 40px; border-radius: 50%; font-size: 24px; cursor: pointer; display: flex; justify-content: center; align-items: center; transition: 0.2s;" (click)="closeZoom()">
