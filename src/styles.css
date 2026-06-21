@@ -339,6 +339,13 @@ a {
     padding: 12px 20px !important;
     font-size: 14px !important;
   }
+
+  .floating-support-btn {
+    bottom: 190px !important;
+    right: 15px !important;
+    width: 45px !important;
+    height: 45px !important;
+  }
 }
 
 .global-footer {
@@ -381,6 +388,31 @@ a {
 .floating-doc-btn:hover {
   transform: translateY(-5px);
   box-shadow: var(--glow-blue-strong), 0 10px 20px rgba(0,0,0,0.4);
+}
+
+.floating-support-btn {
+  position: fixed; 
+  bottom: 150px; /* Above the doc button */
+  right: 30px; 
+  background: var(--accent-secondary); 
+  color: var(--bg-darkest); 
+  border: none; 
+  border-radius: 50%; /* Circle shape */
+  width: 54px;
+  height: 54px;
+  box-shadow: 0 0 15px rgba(255, 171, 64, 0.5); 
+  cursor: pointer; 
+  z-index: 100; 
+  font-weight: 800; 
+  display: flex; 
+  justify-content: center;
+  align-items: center; 
+  transition: 0.3s; 
+}
+
+.floating-support-btn:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 25px rgba(255, 171, 64, 0.8), 0 10px 20px rgba(0,0,0,0.4);
 }
 
 .main-content-wrapper {

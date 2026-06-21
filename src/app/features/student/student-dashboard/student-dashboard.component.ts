@@ -28,6 +28,7 @@ export class StudentDashboardComponent implements OnInit {
   isMobileMenuOpen = false;
   isModulesDropdownOpen = false;
   isDocModalOpen = false;
+  isSupportModalOpen = false;
 
   openDocModal() {
     this.isDocModalOpen = true;
@@ -35,6 +36,14 @@ export class StudentDashboardComponent implements OnInit {
 
   closeDocModal() {
     this.isDocModalOpen = false;
+  }
+
+  openSupportModal() {
+    this.isSupportModalOpen = true;
+  }
+
+  closeSupportModal() {
+    this.isSupportModalOpen = false;
   }
 
   toggleMobileMenu() {
