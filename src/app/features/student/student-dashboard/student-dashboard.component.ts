@@ -5,7 +5,7 @@ import { AuthService } from '../../../core/services/auth.service';
 @Component({
   selector: 'app-student-dashboard',
   templateUrl: './student-dashboard.component.html',
-  styleUrls: ['../admin-dashboard/admin-dashboard.component.css'] // Reusing admin css for simplicity
+  styleUrls: ['../../admin/admin-dashboard/admin-dashboard.component.css'] // Reusing admin css
 })
 export class StudentDashboardComponent {
   constructor(private authService: AuthService, private router: Router) {}
