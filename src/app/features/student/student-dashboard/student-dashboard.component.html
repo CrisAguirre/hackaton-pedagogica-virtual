@@ -15,7 +15,7 @@
             [class.active]="selectedPhase?.id === phase.id"
             [class.locked]="phase.status === 'locked'"
             (click)="openPhase(phase)">
-      {{ phase.title }}
+      {{ phase.title === 'Instrucciones iniciales' ? 'Inicio' : phase.title }}
     </button>
   </div>
 

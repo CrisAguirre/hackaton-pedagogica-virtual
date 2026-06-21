@@ -12,11 +12,10 @@
   <div class="nav-links">
     <!-- Módulos Nav -->
     <ng-container *ngFor="let phase of phases">
-      <button *ngIf="phase.type !== 'info'"
-              class="nav-link" 
+      <button class="nav-link" 
               [class.active]="activeView === 'content' && selectedPhase?.id === phase.id"
               (click)="openPhase(phase)">
-        {{ phase.title }}
+        {{ phase.title === 'Instrucciones iniciales' ? 'Inicio' : phase.title }}
       </button>
     </ng-container>
     
