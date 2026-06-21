@@ -19,18 +19,26 @@ export class AdminDashboardComponent implements OnInit {
     { student: 'Carlos M.', phase: 1, score: 60, submittedAt: new Date('2026-06-20T11:30') },
     { student: 'Luis P.', phase: 2, score: null, submittedAt: new Date('2026-06-21T09:15') }
   ];
-  
   questions: any[] = [];
   currentAnswers: number[] = [];
   multipleAnswers: boolean[][] = [];
   openAnswers: string[] = [];
   score: number | null = null;
   phaseCompleted = false;
+  zoomedImageUrl: string | null = null;
 
   constructor(
     private authService: AuthService, 
     private router: Router
   ) {}
+
+  openZoom(url: string) {
+    this.zoomedImageUrl = url;
+  }
+
+  closeZoom() {
+    this.zoomedImageUrl = null;
+  }
 
   ngOnInit() {
     this.phases = HACKATON_DATA.phases;

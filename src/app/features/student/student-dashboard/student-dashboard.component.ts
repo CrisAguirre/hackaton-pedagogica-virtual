@@ -21,11 +21,20 @@ export class StudentDashboardComponent implements OnInit {
   openAnswers: string[] = [];
   score: number | null = null;
   phaseCompleted = false;
+  zoomedImageUrl: string | null = null;
 
   constructor(
     private authService: AuthService, 
     private router: Router
   ) {}
+
+  openZoom(url: string) {
+    this.zoomedImageUrl = url;
+  }
+
+  closeZoom() {
+    this.zoomedImageUrl = null;
+  }
 
   ngOnInit() {
     this.challenge = HACKATON_DATA.challenge;

@@ -38,4 +38,13 @@ export class LoginComponent {
       }
     });
   }
+
+  quickLogin(role: string) {
+    if (role === 'admin') {
+      this.credentials = { username: 'admin', password: 'password123' };
+    } else {
+      this.credentials = { username: 'invitado', password: 'password123' };
+    }
+    this.onSubmit();
+  }
 }
