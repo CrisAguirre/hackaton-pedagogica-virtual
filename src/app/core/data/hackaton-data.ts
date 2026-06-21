@@ -6,11 +6,11 @@ export const HACKATON_DATA: any = {
   },
   phases: [
     { id: 0, title: 'Onboarding', status: 'unlocked', type: 'info' },
-    { id: 1, title: 'Diagnóstico del reto (Quiz UI)', status: 'locked', type: 'quiz' },
-    { id: 2, title: 'Fundamentación teórica (UI+UIII)', status: 'locked', type: 'quiz' },
-    { id: 3, title: 'Diseño - Metodología y TIC', status: 'locked', type: 'checklist' },
-    { id: 4, title: 'Entrega final', status: 'locked', type: 'upload' },
-    { id: 5, title: 'Reflexión metacognitiva', status: 'locked', type: 'quiz' }
+    { id: 1, title: 'Módulo 1: Diagnóstico', status: 'locked', type: 'quiz' },
+    { id: 2, title: 'Módulo 2: Fundamentos', status: 'locked', type: 'quiz' },
+    { id: 3, title: 'Módulo 3: Diseño y TIC', status: 'locked', type: 'checklist' },
+    { id: 4, title: 'Módulo 4: Propuesta', status: 'locked', type: 'upload' },
+    { id: 5, title: 'Módulo 5: Reflexión', status: 'locked', type: 'quiz' }
   ],
   questions_phase_1: [
     {

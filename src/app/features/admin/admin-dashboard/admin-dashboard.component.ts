@@ -10,16 +10,17 @@ import { HACKATON_DATA } from '../../../core/data/hackaton-data';
   styleUrls: ['./admin-dashboard.component.css']
 })
 export class AdminDashboardComponent implements OnInit {
-  phases = HACKATON_DATA.phases;
-  questions = HACKATON_DATA.questions_phase_1;
   activeView: 'results' | 'content' = 'results';
-  currentTheme: 'light' | 'dark' = 'dark';
+  selectedPhase: any = null;
+  phases: any[] = [];
   
-  // Mock submissions for presentation
   submissions = [
-    { student: 'invitado', phase: 1, score: 66, submittedAt: new Date() },
-    { student: 'invitado', phase: 3, score: null, submittedAt: new Date() }
+    { student: 'Ana G.', phase: 1, score: 85, submittedAt: new Date('2026-06-20T10:00') },
+    { student: 'Carlos M.', phase: 1, score: 60, submittedAt: new Date('2026-06-20T11:30') },
+    { student: 'Luis P.', phase: 2, score: null, submittedAt: new Date('2026-06-21T09:15') }
   ];
+
+  questions: any[] = [];
 
   constructor(
     private authService: AuthService, 
@@ -27,14 +28,29 @@ export class AdminDashboardComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.phases = HACKATON_DATA.phases;
+    this.selectedPhase = this.phases[1]; // Módulo 1 by default for content
+    this.questions = HACKATON_DATA.questions_phase_1;
+  }
+
+  openPhase(phase: any) {
+    if (phase.type === 'info') return;
+    this.activeView = 'content';
+    this.selectedPhase = phase;
+    if (phase.type === 'quiz') {
+      this.questions = HACKATON_DATA['questions_phase_' + phase.id] || [];
+    } else {
+      this.questions = [];
+    }
+  }
+
+  showResults() {
+    this.activeView = 'results';
+    this.selectedPhase = null;
   }
 
   logout() {
     this.authService.logout();
     this.router.navigate(['/login']);
-  }
-
-  switchView(view: 'results' | 'content') {
-    this.activeView = view;
   }
 }

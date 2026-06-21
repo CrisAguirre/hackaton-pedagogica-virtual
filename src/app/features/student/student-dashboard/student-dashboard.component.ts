@@ -10,24 +10,17 @@ import { HACKATON_DATA } from '../../../core/data/hackaton-data';
   styleUrls: ['./student-dashboard.component.css']
 })
 export class StudentDashboardComponent implements OnInit {
-  activeTab: 'inicio' | 'fases' = 'inicio';
-  currentTheme: 'light' | 'dark' = 'dark';
-  
   challenge: any;
   phases: any[] = [];
   selectedPhase: any = null;
 
-  // Para quizzes (Fase 1, 2, 5)
+  // State
   questions: any[] = [];
   currentAnswers: number[] = [];
   score: number | null = null;
   phaseCompleted = false;
-
-  // Para Checklists (Fase 3A, 3B)
   checklistItems: any[] = [];
   checklistAnswers: boolean[] = [];
-
-  // Para Entrega (Fase 4)
   deliveryUrl: string = '';
   deliveryText: string = '';
 
@@ -39,14 +32,15 @@ export class StudentDashboardComponent implements OnInit {
   ngOnInit() {
     this.challenge = HACKATON_DATA.challenge;
     this.phases = HACKATON_DATA.phases;
-  }
-
-  switchTab(tab: 'inicio' | 'fases') {
-    this.activeTab = tab;
+    // Auto open the first available phase (Onboarding or Module 1)
+    this.openPhase(this.phases[0]);
   }
 
   openPhase(phase: any) {
-    if (phase.status === 'locked') return;
+    if (phase.status === 'locked') {
+      alert('Este módulo está bloqueado. Completa el anterior primero.');
+      return;
+    }
     this.selectedPhase = phase;
     this.phaseCompleted = false;
     this.score = null;
@@ -58,10 +52,6 @@ export class StudentDashboardComponent implements OnInit {
       this.checklistItems = HACKATON_DATA['checklists_phase_' + phase.id] || [];
       this.checklistAnswers = new Array(this.checklistItems.length).fill(false);
     }
-  }
-
-  closePhase() {
-    this.selectedPhase = null;
   }
 
   selectAnswer(qIndex: number, aIndex: number) {
@@ -80,12 +70,11 @@ export class StudentDashboardComponent implements OnInit {
       });
       this.score = (correct / this.questions.length) * 100;
     } else if (this.selectedPhase.type === 'checklist') {
-      // Checklist is pass/fail based on checking all items
       const allChecked = this.checklistAnswers.every(v => v);
       this.score = allChecked ? 100 : 0;
     } else if (this.selectedPhase.type === 'upload') {
-      if (this.deliveryUrl && this.deliveryText) {
-        this.score = 100; // Mock score for submitting
+      if (this.deliveryUrl || this.deliveryText) {
+        this.score = 100;
       } else {
         this.score = 0;
       }
@@ -93,7 +82,7 @@ export class StudentDashboardComponent implements OnInit {
 
     this.phaseCompleted = true;
 
-    // Desbloquear siguiente fase visualmente si se aprueba
+    // Desbloquear siguiente fase
     if (this.score !== null && this.score >= 70) {
       const nextPhaseIndex = this.phases.findIndex(p => p.id === this.selectedPhase.id) + 1;
       if (nextPhaseIndex < this.phases.length) {
