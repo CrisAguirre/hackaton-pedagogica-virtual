@@ -9,15 +9,38 @@
     <div class="logo-text">Hack<span>atón</span></div>
   </div>
 
-  <div class="nav-links">
-    <!-- Módulos Nav -->
-    <ng-container *ngFor="let phase of phases">
+  <button class="menu-toggle" (click)="toggleMobileMenu()">
+    ☰
+  </button>
+
+  <div class="nav-links" [class.mobile-open]="isMobileMenuOpen">
+    
+    <!-- Botón Inicio -->
+    <button class="nav-link" 
+            [class.active]="activeView === 'content' && selectedPhase?.id === 0"
+            (click)="openPhase(phases[0])">
+      Inicio
+    </button>
+
+    <!-- Menú Desplegable de Módulos -->
+    <div class="dropdown-container">
       <button class="nav-link" 
-              [class.active]="activeView === 'content' && selectedPhase?.id === phase.id"
-              (click)="openPhase(phase)">
-        {{ phase.title === 'Instrucciones iniciales' ? 'Inicio' : phase.title }}
+              (click)="toggleModulesDropdown($event)"
+              [class.active]="activeView === 'content' && selectedPhase?.id !== 0">
+        Módulos ▾
       </button>
-    </ng-container>
+      <div class="dropdown-menu" [class.show]="isModulesDropdownOpen">
+        <ng-container *ngFor="let phase of phases">
+          <button *ngIf="phase.id !== 0"
+                  class="dropdown-item"
+                  [class.locked]="phase.status === 'locked'"
+                  [style.color]="selectedPhase?.id === phase.id ? 'var(--accent-primary)' : 'var(--text-light)'"
+                  (click)="openPhase(phase)">
+            {{ phase.title }} <span *ngIf="phase.status === 'locked'" style="font-size:12px;">🔒</span>
+          </button>
+        </ng-container>
+      </div>
+    </div>
     
     <!-- Admin Nav -->
     <button class="nav-link" 

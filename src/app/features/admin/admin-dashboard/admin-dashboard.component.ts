@@ -26,6 +26,21 @@ export class AdminDashboardComponent implements OnInit {
   score: number | null = null;
   phaseCompleted = false;
   zoomedImageUrl: string | null = null;
+  
+  // Menu State
+  isMobileMenuOpen = false;
+  isModulesDropdownOpen = false;
+
+  toggleMobileMenu() {
+    this.isMobileMenuOpen = !this.isMobileMenuOpen;
+  }
+
+  toggleModulesDropdown(event?: Event) {
+    if (event) {
+      event.stopPropagation();
+    }
+    this.isModulesDropdownOpen = !this.isModulesDropdownOpen;
+  }
 
   constructor(
     private authService: AuthService, 
@@ -58,6 +73,9 @@ export class AdminDashboardComponent implements OnInit {
   }
 
   openPhase(phase: any) {
+    this.isMobileMenuOpen = false;
+    this.isModulesDropdownOpen = false;
+    
     if (phase.status === 'locked') {
       this.showToast('Nota para el docente: Los estudiantes verán este módulo bloqueado hasta que completen el anterior.');
     }
@@ -90,6 +108,9 @@ export class AdminDashboardComponent implements OnInit {
   }
 
   showResults() {
+    this.isMobileMenuOpen = false;
+    this.isModulesDropdownOpen = false;
+    
     this.activeView = 'results';
     this.selectedPhase = null;
   }

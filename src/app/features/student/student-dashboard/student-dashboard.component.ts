@@ -22,6 +22,21 @@ export class StudentDashboardComponent implements OnInit {
   score: number | null = null;
   phaseCompleted = false;
   zoomedImageUrl: string | null = null;
+  
+  // Menu State
+  isMobileMenuOpen = false;
+  isModulesDropdownOpen = false;
+
+  toggleMobileMenu() {
+    this.isMobileMenuOpen = !this.isMobileMenuOpen;
+  }
+
+  toggleModulesDropdown(event?: Event) {
+    if (event) {
+      event.stopPropagation();
+    }
+    this.isModulesDropdownOpen = !this.isModulesDropdownOpen;
+  }
 
   constructor(
     private authService: AuthService, 
@@ -53,6 +68,9 @@ export class StudentDashboardComponent implements OnInit {
   }
 
   openPhase(phase: any) {
+    this.isMobileMenuOpen = false;
+    this.isModulesDropdownOpen = false;
+    
     if (phase.status === 'locked') {
       this.showToast('Este módulo está bloqueado. Completa el anterior con éxito para avanzar.');
       return;
