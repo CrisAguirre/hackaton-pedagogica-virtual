@@ -2,7 +2,12 @@
   <div class="glass-panel dashboard-panel neon-box-magenta">
     <div class="header">
       <h2><span class="neon-text-magenta">ADMIN</span>_HUB</h2>
-      <button class="logout-btn neon-box-cyan" (click)="logout()">Desconectar</button>
+      <div class="user-controls" style="display:flex; gap:15px; align-items:center;">
+        <button class="theme-btn neon-box-cyan" (click)="toggleTheme()">
+          {{ currentTheme === 'dark' ? '🌞 Modo Día' : '🌙 Modo Noche' }}
+        </button>
+        <button class="logout-btn neon-box-cyan" (click)="logout()">Desconectar</button>
+      </div>
     </div>
     
     <div class="tabs">

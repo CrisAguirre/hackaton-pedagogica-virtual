@@ -20,8 +20,36 @@
   margin-bottom: 30px;
 }
 
-.logout-btn {
-  padding: 10px 20px;
+.nav-controls, .user-controls {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.tab-btn {
+  padding: 8px 16px;
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+  cursor: pointer;
+  border-radius: 4px;
+  font-family: 'Orbitron', sans-serif;
+  transition: 0.3s;
+}
+
+.tab-btn:hover {
+  background: rgba(0, 255, 255, 0.1);
+}
+
+.tab-btn.active {
+  background: rgba(0, 255, 255, 0.2);
+  border-color: var(--neon-cyan);
+  box-shadow: inset 0 0 10px rgba(0,255,255,0.3);
+  color: var(--neon-cyan);
+}
+
+.theme-btn, .logout-btn {
+  padding: 8px 16px;
   background: transparent;
   color: #fff;
   cursor: pointer;

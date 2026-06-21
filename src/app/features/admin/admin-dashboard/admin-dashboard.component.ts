@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../core/services/auth.service';
+import { ThemeService } from '../../../core/services/theme.service';
 import { HACKATON_DATA } from '../../../core/data/hackaton-data';
 
 @Component({
@@ -12,6 +13,7 @@ export class AdminDashboardComponent implements OnInit {
   phases = HACKATON_DATA.phases;
   questions = HACKATON_DATA.questions_phase_1;
   activeView: 'results' | 'content' = 'results';
+  currentTheme: 'light' | 'dark' = 'dark';
   
   // Mock submissions for presentation
   submissions = [
@@ -19,9 +21,21 @@ export class AdminDashboardComponent implements OnInit {
     { student: 'invitado', phase: 3, score: null, submittedAt: new Date() }
   ];
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private authService: AuthService, 
+    private themeService: ThemeService,
+    private router: Router
+  ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.themeService.theme$.subscribe(theme => {
+      this.currentTheme = theme;
+    });
+  }
+
+  toggleTheme() {
+    this.themeService.toggleTheme();
+  }
 
   logout() {
     this.authService.logout();
