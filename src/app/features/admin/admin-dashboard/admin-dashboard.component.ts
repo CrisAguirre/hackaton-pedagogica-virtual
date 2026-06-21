@@ -42,8 +42,10 @@ export class AdminDashboardComponent implements OnInit {
 
   ngOnInit() {
     this.phases = HACKATON_DATA.phases;
-    this.selectedPhase = this.phases[1]; // Módulo 1 by default for content
-    this.questions = HACKATON_DATA.questions_phase_1;
+    this.selectedPhase = this.phases[0]; // Start at info/home by default
+    
+    // Simulate loading the selected phase
+    this.openPhase(this.selectedPhase);
   }
 
   openPhase(phase: any) {
