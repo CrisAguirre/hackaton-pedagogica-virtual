@@ -364,7 +364,158 @@
     <polyline points="10 9 9 9 8 9"></polyline>
   </svg></button>
 
-<!-- Document Modal Overlay -->
+<!-- Floating Support Button (ℹ) -->
+<button class="floating-support-btn" title="Material de Apoyo: Justificación de Preguntas" (click)="openSupportModal()">
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+</button>
+
+<!-- Support Modal Overlay -->
+<div *ngIf="isSupportModalOpen" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.88); z-index: 9999; display: flex; justify-content: center; align-items: center;" (click)="closeSupportModal()">
+  <div class="animate-fade-in-up" style="background: var(--bg-card); width: 92%; max-width: 850px; max-height: 88vh; border-radius: 12px; box-shadow: var(--shadow-card); border-top: 4px solid var(--accent-secondary); display: flex; flex-direction: column; overflow: hidden;" (click)="$event.stopPropagation()">
+    
+    <!-- Modal Header -->
+    <div style="padding: 20px; border-bottom: 1px solid var(--bg-medium); display: flex; justify-content: space-between; align-items: center; background: rgba(6,13,26,0.5);">
+      <h3 style="color: var(--text-white); margin: 0; display: flex; align-items: center; gap: 10px;">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent-secondary)" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+        Material de Apoyo — Justificación de Preguntas
+      </h3>
+      <button style="background: transparent; border: none; color: var(--text-muted); font-size: 24px; cursor: pointer; transition: 0.2s;" (click)="closeSupportModal()">&times;</button>
+    </div>
+
+    <!-- Download Button Section -->
+    <div style="padding: 15px 20px; text-align: center; background: var(--bg-dark); border-bottom: 1px solid var(--bg-medium);">
+      <p style="color: var(--text-light); margin-bottom: 12px; font-size: 13px;">Descarga el documento completo con el contexto académico y la justificación pedagógica de cada pregunta.</p>
+      <a href="assets/Justificacion_Preguntas_Hackaton.pdf" download class="btn-primary" style="text-decoration: none; display: inline-flex; align-items: center; gap: 8px; max-width: 320px; justify-content: center;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+        Descargar Justificación (PDF)
+      </a>
+    </div>
+
+    <!-- Modal Scrollable Content -->
+    <div style="padding: 30px; overflow-y: auto; color: var(--text-light); font-size: 14px; line-height: 1.8; text-align: left;">
+      
+      <p style="color: var(--text-muted); margin-bottom: 25px;">Este documento detalla el sustrato teórico y la intencionalidad pedagógica detrás de cada uno de los 40 reactivos (8 por módulo) estructurados para la Hackatón Pedagógica Virtual.</p>
+
+      <!-- Módulo 1 -->
+      <h3 style="color: var(--accent-primary); margin-bottom: 15px; padding-bottom: 8px; border-bottom: 1px solid var(--bg-medium);">Módulo 1: Visiones Didácticas y Metodológicas</h3>
+      
+      <div style="margin-bottom: 18px; padding: 15px; background: var(--bg-dark); border-radius: 8px; border-left: 3px solid var(--accent-primary);">
+        <h4 style="color: var(--text-white); margin-bottom: 8px;">1. ¿Quién es considerado el padre de la didáctica? <span style="color: var(--accent-secondary); font-size: 12px;">(Selección Única)</span></h4>
+        <p><strong style="color: var(--accent-primary);">Contexto:</strong> Juan Amos Comenio (1632) representa el punto de inflexión epistemológico donde la enseñanza deja de ser un ejercicio empírico para constituirse como una disciplina formal.</p>
+        <p><strong style="color: var(--accent-secondary);">Justificación:</strong> Es imperativo que el futuro docente comprenda la génesis teleológica de la didáctica, asegurando que la innovación sea concebida como una evolución y no como una ruptura sin memoria histórica.</p>
+      </div>
+
+      <div style="margin-bottom: 18px; padding: 15px; background: var(--bg-dark); border-radius: 8px; border-left: 3px solid var(--accent-primary);">
+        <h4 style="color: var(--text-white); margin-bottom: 8px;">2. La innovación didáctica contemporánea se enfoca en: <span style="color: var(--accent-secondary); font-size: 12px;">(Selección Única)</span></h4>
+        <p><strong style="color: var(--accent-primary);">Contexto:</strong> Díaz Barriga postula que la verdadera innovación exige una superación del modelo conductista-transmisivo hacia un aprendizaje situado.</p>
+        <p><strong style="color: var(--accent-secondary);">Justificación:</strong> Mide la madurez conceptual del estudiante, obligando a discriminar entre el eficientismo memorístico y el paradigma socioconstructivista.</p>
+      </div>
+
+      <div style="margin-bottom: 18px; padding: 15px; background: var(--bg-dark); border-radius: 8px; border-left: 3px solid var(--accent-primary);">
+        <h4 style="color: var(--text-white); margin-bottom: 8px;">3–4. Características de la innovación / Elementos de la didáctica <span style="color: var(--accent-secondary); font-size: 12px;">(Selección Múltiple)</span></h4>
+        <p><strong style="color: var(--accent-primary);">Contexto:</strong> La innovación es multifactorial y la tríada pedagógica (docente, estudiante, contenido) conforma el núcleo irreductible del acto educativo.</p>
+        <p><strong style="color: var(--accent-secondary);">Justificación:</strong> Exigen análisis multidimensional y retención de componentes estructurales del diseño instruccional.</p>
+      </div>
+
+      <div style="margin-bottom: 18px; padding: 15px; background: var(--bg-dark); border-radius: 8px; border-left: 3px solid var(--accent-primary);">
+        <h4 style="color: var(--text-white); margin-bottom: 8px;">5–6. Innovación más allá de la tecnología / Aplicación en contexto <span style="color: var(--accent-secondary); font-size: 12px;">(Preguntas Abiertas)</span></h4>
+        <p><strong style="color: var(--accent-primary);">Contexto:</strong> La verdadera transformación ocurre en el plano metodológico y epistemológico; la didáctica es contextodependiente.</p>
+        <p><strong style="color: var(--accent-secondary);">Justificación:</strong> Reactivos de alto nivel cognitivo que fomentan argumentación crítica y transferencia directa.</p>
+      </div>
+
+      <div style="margin-bottom: 18px; padding: 15px; background: var(--bg-dark); border-radius: 8px; border-left: 3px solid var(--accent-primary);">
+        <h4 style="color: var(--text-white); margin-bottom: 8px;">7–8. Línea de tiempo / Diagrama de relación <span style="color: var(--accent-secondary); font-size: 12px;">(Análisis Visual)</span></h4>
+        <p><strong style="color: var(--accent-primary);">Contexto:</strong> La integración TIC es el hito de la didáctica moderna; la Didáctica es rama de la Pedagogía.</p>
+        <p><strong style="color: var(--accent-secondary);">Justificación:</strong> Evalúan alfabetización visual y esquemas mentales organizados sobre las Ciencias de la Educación.</p>
+      </div>
+
+      <!-- Módulo 2 -->
+      <h3 style="color: var(--accent-primary); margin-top: 30px; margin-bottom: 15px; padding-bottom: 8px; border-bottom: 1px solid var(--bg-medium);">Módulo 2: Nuevas Metodologías y Escenarios</h3>
+
+      <div style="margin-bottom: 18px; padding: 15px; background: var(--bg-dark); border-radius: 8px; border-left: 3px solid #66bb6a;">
+        <h4 style="color: var(--text-white); margin-bottom: 8px;">1–2. B-learning / Laboratorio de Innovación <span style="color: var(--accent-secondary); font-size: 12px;">(Selección Única)</span></h4>
+        <p><strong style="color: #66bb6a;">Contexto:</strong> B-learning combina sincronía presencial con asincronía virtual. El aula se transforma en un espacio de experimentación activa.</p>
+        <p><strong style="color: var(--accent-secondary);">Justificación:</strong> Verifican comprensión de modelos post-pandémicos y la reconfiguración del espacio como variable didáctica.</p>
+      </div>
+
+      <div style="margin-bottom: 18px; padding: 15px; background: var(--bg-dark); border-radius: 8px; border-left: 3px solid #66bb6a;">
+        <h4 style="color: var(--text-white); margin-bottom: 8px;">3–4. Estrategias activas / Beneficios b-learning <span style="color: var(--accent-secondary); font-size: 12px;">(Selección Múltiple)</span></h4>
+        <p><strong style="color: #66bb6a;">Contexto:</strong> ABPr, ABP y ABC son metodologías inductivas. El b-learning aporta flexibilidad, autonomía y personalización.</p>
+        <p><strong style="color: var(--accent-secondary);">Justificación:</strong> Clasificar el arsenal metodológico y validar argumentos técnicos para la adopción institucional.</p>
+      </div>
+
+      <div style="margin-bottom: 18px; padding: 15px; background: var(--bg-dark); border-radius: 8px; border-left: 3px solid #66bb6a;">
+        <h4 style="color: var(--text-white); margin-bottom: 8px;">5–8. Diseño ABPr / Retos b-learning / Rol docente / Esferas <span style="color: var(--accent-secondary); font-size: 12px;">(Abiertas + Visuales)</span></h4>
+        <p><strong style="color: #66bb6a;">Contexto:</strong> ABPr requiere fases sistemáticas; la innovación choca con barreras sistémicas; el docente es mediador.</p>
+        <p><strong style="color: var(--accent-secondary);">Justificación:</strong> Evalúan creación (Bloom), liderazgo pedagógico, deconstrucción de autoridad y síntesis visual.</p>
+      </div>
+
+      <!-- Módulo 3 -->
+      <h3 style="color: var(--accent-primary); margin-top: 30px; margin-bottom: 15px; padding-bottom: 8px; border-bottom: 1px solid var(--bg-medium);">Módulo 3: Modelo TPACK</h3>
+
+      <div style="margin-bottom: 18px; padding: 15px; background: var(--bg-dark); border-radius: 8px; border-left: 3px solid #ab47bc;">
+        <h4 style="color: var(--text-white); margin-bottom: 8px;">1–2. Siglas TPACK / Conocimiento disciplinar (CK) <span style="color: var(--accent-secondary); font-size: 12px;">(Selección Única)</span></h4>
+        <p><strong style="color: #ab47bc;">Contexto:</strong> Mishra y Koehler (2006) expandieron el PCK de Shulman. El CK es la erudición sobre la materia misma.</p>
+        <p><strong style="color: var(--accent-secondary);">Justificación:</strong> Alfabetización fundacional del marco teórico y recordatorio de que la innovación requiere dominio disciplinar.</p>
+      </div>
+
+      <div style="margin-bottom: 18px; padding: 15px; background: var(--bg-dark); border-radius: 8px; border-left: 3px solid #ab47bc;">
+        <h4 style="color: var(--text-white); margin-bottom: 8px;">3–4. Intersecciones TPACK / Objetivos del modelo <span style="color: var(--accent-secondary); font-size: 12px;">(Selección Múltiple)</span></h4>
+        <p><strong style="color: #ab47bc;">Contexto:</strong> TCK, PCK y TPK son zonas de traslape. El fin es una enseñanza efectiva con tecnología como vehículo pedagógico.</p>
+        <p><strong style="color: var(--accent-secondary);">Justificación:</strong> Lectura compleja del modelo y desmitificación del fetichismo tecnológico.</p>
+      </div>
+
+      <div style="margin-bottom: 18px; padding: 15px; background: var(--bg-dark); border-radius: 8px; border-left: 3px solid #ab47bc;">
+        <h4 style="color: var(--text-white); margin-bottom: 8px;">5–8. Integración TPACK / Obstáculos / Venn / Caso de uso <span style="color: var(--accent-secondary); font-size: 12px;">(Abiertas + Visuales)</span></h4>
+        <p><strong style="color: #ab47bc;">Contexto:</strong> Orquestar TK+PK+CK en una clase real; llegar al "Sweet Spot" requiere formación continua.</p>
+        <p><strong style="color: var(--accent-secondary);">Justificación:</strong> Mayor exigencia aplicativa, autoevaluación profesional e "ingeniería inversa" pedagógica.</p>
+      </div>
+
+      <!-- Módulo 4 -->
+      <h3 style="color: var(--accent-primary); margin-top: 30px; margin-bottom: 15px; padding-bottom: 8px; border-bottom: 1px solid var(--bg-medium);">Módulo 4: Estrategias Didácticas Activas</h3>
+
+      <div style="margin-bottom: 18px; padding: 15px; background: var(--bg-dark); border-radius: 8px; border-left: 3px solid #ef5350;">
+        <h4 style="color: var(--text-white); margin-bottom: 8px;">1–2. Rol del estudiante / ABC (Casos) <span style="color: var(--accent-secondary); font-size: 12px;">(Selección Única)</span></h4>
+        <p><strong style="color: #ef5350;">Contexto:</strong> El alumno es agente activo. El ABC (Harvard) expone a narrativas complejas con dilemas morales.</p>
+        <p><strong style="color: var(--accent-secondary);">Justificación:</strong> Reafirma el postulado socioconstructivista y diferencia la especificidad de cada metodología.</p>
+      </div>
+
+      <div style="margin-bottom: 18px; padding: 15px; background: var(--bg-dark); border-radius: 8px; border-left: 3px solid #ef5350;">
+        <h4 style="color: var(--text-white); margin-bottom: 8px;">3–4. Competencias superiores / ABP vs ABPr <span style="color: var(--accent-secondary); font-size: 12px;">(Selección Múltiple)</span></h4>
+        <p><strong style="color: #ef5350;">Contexto:</strong> Catalizan evaluación crítica y creatividad sistémica. ABPr busca un artefacto final; ABP prioriza el proceso.</p>
+        <p><strong style="color: var(--accent-secondary);">Justificación:</strong> Conecta diseño metodológico con desarrollo competencial y resuelve confusiones conceptuales habituales.</p>
+      </div>
+
+      <div style="margin-bottom: 18px; padding: 15px; background: var(--bg-dark); border-radius: 8px; border-left: 3px solid #ef5350;">
+        <h4 style="color: var(--text-white); margin-bottom: 8px;">5–8. Inclusión / Pregunta detonante / Actitudes / Convergencia <span style="color: var(--accent-secondary); font-size: 12px;">(Abiertas + Visuales)</span></h4>
+        <p><strong style="color: #ef5350;">Contexto:</strong> ABPr como imperativo de justicia social (DUA); preguntas detonantes son la habilidad más compleja del ABP.</p>
+        <p><strong style="color: var(--accent-secondary);">Justificación:</strong> Evaluación ética, sofisticación intelectual, perfil actitudinal del siglo XXI y visión sistémica.</p>
+      </div>
+
+      <!-- Módulo 5 -->
+      <h3 style="color: var(--accent-primary); margin-top: 30px; margin-bottom: 15px; padding-bottom: 8px; border-bottom: 1px solid var(--bg-medium);">Módulo 5: Las TIC en el Aula</h3>
+
+      <div style="margin-bottom: 18px; padding: 15px; background: var(--bg-dark); border-radius: 8px; border-left: 3px solid #29b6f6;">
+        <h4 style="color: var(--text-white); margin-bottom: 8px;">1–2. Flipped Classroom / Gamificación <span style="color: var(--accent-secondary); font-size: 12px;">(Selección Única)</span></h4>
+        <p><strong style="color: #29b6f6;">Contexto:</strong> Bergmann y Sams: teoría en casa, práctica en clase. Gamificación usa dinámicas, mecánicas y componentes de juego.</p>
+        <p><strong style="color: var(--accent-secondary);">Justificación:</strong> Reestructuración del cronosistema escolar y profesionalización del diseño de motivación.</p>
+      </div>
+
+      <div style="margin-bottom: 18px; padding: 15px; background: var(--bg-dark); border-radius: 8px; border-left: 3px solid #29b6f6;">
+        <h4 style="color: var(--text-white); margin-bottom: 8px;">3–4. Herramientas TIC / Impacto positivo <span style="color: var(--accent-secondary); font-size: 12px;">(Selección Múltiple)</span></h4>
+        <p><strong style="color: #29b6f6;">Contexto:</strong> AR/VR, MOOCs, Wow Rooms proveen affordances inéditas. Las TIC democratizan el saber y posibilitan Learning Analytics.</p>
+        <p><strong style="color: var(--accent-secondary);">Justificación:</strong> Curaduría tecnológica y análisis metacognitivo sobre la potencialidad emancipadora de la tecnología.</p>
+      </div>
+
+      <div style="margin-bottom: 18px; padding: 15px; background: var(--bg-dark); border-radius: 8px; border-left: 3px solid #29b6f6;">
+        <h4 style="color: var(--text-white); margin-bottom: 8px;">5–8. Realidad Aumentada / Reflexión final / Sincronía / Aula Invertida <span style="color: var(--accent-secondary); font-size: 12px;">(Abiertas + Visuales)</span></h4>
+        <p><strong style="color: #29b6f6;">Contexto:</strong> RA superpone datos digitales sobre el entorno; la metacognición consolida el aprendizaje; CMC síncrona restaura la inmediatez.</p>
+        <p><strong style="color: var(--accent-secondary);">Justificación:</strong> Diseño instruccional prospectivo, cierre experiencial transformador y comprensión operativa del Flipped Learning.</p>
+      </div>
+
+    </div>
+  </div>
+</div>
 <div *ngIf="isDocModalOpen"
   style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.85); z-index: 9999; display: flex; justify-content: center; align-items: center;"
   (click)="closeDocModal()">
