@@ -154,14 +154,13 @@
 
       </div>
     </div>
-
-    <!-- Zoom Modal Overlay -->
-    <div *ngIf="zoomedImageUrl" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.85); z-index: 9999; display: flex; justify-content: center; align-items: center; cursor: zoom-out;" (click)="closeZoom()">
-      <button style="position: absolute; top: 20px; right: 20px; background: rgba(255, 255, 255, 0.1); border: none; color: white; width: 40px; height: 40px; border-radius: 50%; font-size: 24px; cursor: pointer; display: flex; justify-content: center; align-items: center; transition: 0.2s;" (click)="closeZoom()">
-        &times;
-      </button>
-      <img [src]="zoomedImageUrl" style="max-width: 90%; max-height: 90vh; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);" (click)="$event.stopPropagation()">
-    </div>
-
   </div>
+</div>
+
+<!-- Zoom Modal Overlay (Must be outside of transform containers) -->
+<div *ngIf="zoomedImageUrl" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.85); z-index: 9999; display: flex; justify-content: center; align-items: center; cursor: zoom-out;" (click)="closeZoom()">
+  <button style="position: absolute; top: 20px; right: 20px; background: rgba(255, 255, 255, 0.1); border: none; color: white; width: 40px; height: 40px; border-radius: 50%; font-size: 24px; cursor: pointer; display: flex; justify-content: center; align-items: center; transition: 0.2s;" (click)="closeZoom()">
+    &times;
+  </button>
+  <img [src]="zoomedImageUrl" style="max-width: 90%; max-height: 90vh; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);" (click)="$event.stopPropagation()">
 </div>

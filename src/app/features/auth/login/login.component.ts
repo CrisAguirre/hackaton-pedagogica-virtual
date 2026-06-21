@@ -41,9 +41,9 @@ export class LoginComponent {
 
   quickLogin(role: string) {
     if (role === 'admin') {
-      this.credentials = { username: 'admin', password: 'password123' };
+      this.credentials = { username: 'admin', password: '@cceso2026' };
     } else {
-      this.credentials = { username: 'invitado', password: 'password123' };
+      this.credentials = { username: 'invitado', password: 'Cl@v32026' };
     }
     this.onSubmit();
   }
