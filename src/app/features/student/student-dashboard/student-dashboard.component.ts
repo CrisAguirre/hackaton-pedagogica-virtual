@@ -81,6 +81,7 @@ export class StudentDashboardComponent implements OnInit {
   openPhase(phase: any) {
     this.isMobileMenuOpen = false;
     this.isModulesDropdownOpen = false;
+    window.scrollTo(0, 0);
     
     if (phase.status === 'locked') {
       this.showToast('Este módulo está bloqueado. Completa el anterior con éxito para avanzar.');

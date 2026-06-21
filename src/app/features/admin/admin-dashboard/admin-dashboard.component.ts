@@ -102,6 +102,7 @@ export class AdminDashboardComponent implements OnInit {
   openPhase(phase: any) {
     this.isMobileMenuOpen = false;
     this.isModulesDropdownOpen = false;
+    window.scrollTo(0, 0);
     
     if (phase.status === 'locked') {
       this.showToast('Nota para el docente: Los estudiantes verán este módulo bloqueado hasta que completen el anterior.');
@@ -137,6 +138,7 @@ export class AdminDashboardComponent implements OnInit {
   showResults() {
     this.isMobileMenuOpen = false;
     this.isModulesDropdownOpen = false;
+    window.scrollTo(0, 0);
     
     this.activeView = 'results';
     this.selectedPhase = null;
