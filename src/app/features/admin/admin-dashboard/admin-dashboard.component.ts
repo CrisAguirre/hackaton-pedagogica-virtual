@@ -19,8 +19,13 @@ export class AdminDashboardComponent implements OnInit {
     { student: 'Carlos M.', phase: 1, score: 60, submittedAt: new Date('2026-06-20T11:30') },
     { student: 'Luis P.', phase: 2, score: null, submittedAt: new Date('2026-06-21T09:15') }
   ];
-
+  
   questions: any[] = [];
+  currentAnswers: number[] = [];
+  multipleAnswers: boolean[][] = [];
+  openAnswers: string[] = [];
+  score: number | null = null;
+  phaseCompleted = false;
 
   constructor(
     private authService: AuthService, 
@@ -37,11 +42,30 @@ export class AdminDashboardComponent implements OnInit {
     if (phase.type === 'info') return;
     this.activeView = 'content';
     this.selectedPhase = phase;
+    this.phaseCompleted = false;
+    this.score = null;
+
     if (phase.type === 'quiz') {
       this.questions = HACKATON_DATA['questions_phase_' + phase.id] || [];
-    } else {
-      this.questions = [];
+      this.currentAnswers = new Array(this.questions.length).fill(-1);
+      this.openAnswers = new Array(this.questions.length).fill('');
+      this.multipleAnswers = this.questions.map((q: any) => {
+        return q.options ? new Array(q.options.length).fill(false) : [];
+      });
     }
+  }
+
+  // Dummy methods to avoid console errors if admin clicks things
+  selectAnswer(qIndex: number, aIndex: number) {
+    this.currentAnswers[qIndex] = aIndex;
+  }
+
+  toggleMultipleAnswer(qIndex: number, aIndex: number) {
+    this.multipleAnswers[qIndex][aIndex] = !this.multipleAnswers[qIndex][aIndex];
+  }
+
+  submitPhase() {
+    alert("Modo vista de profesor. Envío desactivado.");
   }
 
   showResults() {

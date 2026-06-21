@@ -1,50 +1,65 @@
 export const HACKATON_DATA: any = {
   challenge: {
     id: 1,
-    title: 'Virtualización de la enseñanza',
-    description: 'Diseñar una secuencia didáctica para un curso presencial que debe migrar a modalidad virtual en una semana.'
+    title: 'Innovación Didáctica',
+    description: 'Diseñar una solución pedagógica innovadora basándose en referentes teóricos actuales. Contempla objetivos, metodología, recursos, evaluación y actividades innovadoras.'
   },
   phases: [
     { id: 0, title: 'Onboarding', status: 'unlocked', type: 'info' },
-    { id: 1, title: 'Módulo 1: Diagnóstico', status: 'locked', type: 'quiz' },
-    { id: 2, title: 'Módulo 2: Fundamentos', status: 'locked', type: 'quiz' },
-    { id: 3, title: 'Módulo 3: Diseño y TIC', status: 'locked', type: 'checklist' },
-    { id: 4, title: 'Módulo 4: Propuesta', status: 'locked', type: 'upload' },
-    { id: 5, title: 'Módulo 5: Reflexión', status: 'locked', type: 'quiz' }
+    { id: 1, title: 'Módulo 1: Visiones Didácticas', status: 'locked', type: 'quiz' },
+    { id: 2, title: 'Módulo 2: Metodologías', status: 'locked', type: 'quiz' },
+    { id: 3, title: 'Módulo 3: Modelo TPACK', status: 'locked', type: 'quiz' },
+    { id: 4, title: 'Módulo 4: Estrategias', status: 'locked', type: 'quiz' },
+    { id: 5, title: 'Módulo 5: TIC en el Aula', status: 'locked', type: 'quiz' }
   ],
   questions_phase_1: [
-    {
-      id: 'q1', text: '¿Cuál es el primer paso metodológico antes de diseñar una solución didáctica para un reto de la hackatón?',
-      options: ['Elegir la herramienta tecnológica', 'Comprender y delimitar la problemática educativa', 'Redactar la evaluación final', 'Buscar referencias bibliográficas al azar'],
-      correctIndex: 1, feedback: 'La innovación didáctica parte de entender el problema real del contexto educativo antes de proponer soluciones.'
-    },
-    {
-      id: 'q2', text: 'La didáctica puede entenderse como la disciplina que organiza la transmisión de saberes entre generaciones.',
-      options: ['Verdadero', 'Falso'], correctIndex: 0, feedback: 'Así se define en la Unidad I: la didáctica es la capa que organiza esa transmisión.'
-    }
+    { questionType: 'single', id: 'm1_q1', text: '¿Quién es considerado el padre de la didáctica y autor de la "Didáctica Magna"?', options: ['Juan Amos Comenio', 'Jean Piaget', 'Lev Vygotsky', 'Ángel Díaz Barriga'], correctIndex: 0, feedback: 'Correcto. Comenio sentó las bases de la didáctica en 1632.' },
+    { questionType: 'single', id: 'm1_q2', text: 'La innovación didáctica contemporánea (según Díaz Barriga) se enfoca en:', options: ['Memorización pura', 'El aprendizaje activo y situado', 'Eliminar la tecnología', 'Clases magistrales exclusivas'], correctIndex: 1, feedback: 'Exacto, busca que el aprendizaje sea significativo y situado.' },
+    { questionType: 'multiple', id: 'm1_q3', text: 'Selecciona las características que definen la innovación didáctica en el siglo XXI (Selecciona varias):', options: ['Uso exclusivo de libros impresos', 'Integración de recursos digitales', 'Resignificación de la mediación del aprendizaje', 'Docente como único portador del saber', 'Adaptación al contexto educativo'], correctIndexes: [1, 2, 4], feedback: 'La innovación implica tecnología, resignificación y contextualización.' },
+    { questionType: 'multiple', id: 'm1_q4', text: '¿Cuáles son los elementos fundamentales de la didáctica?', options: ['El docente', 'El estudiante', 'El currículo', 'El personal administrativo'], correctIndexes: [0, 1, 2], feedback: 'Los elementos centrales son el docente, el estudiante y el contenido/currículo.' },
+    { questionType: 'open', id: 'm1_q5', text: 'Según tu perspectiva, ¿por qué la innovación didáctica NO se limita únicamente al uso de herramientas tecnológicas?', feedback: 'Respuesta registrada. Es importante comprender que la innovación es también un cambio metodológico, no solo instrumental.' },
+    { questionType: 'open', id: 'm1_q6', text: 'Describe brevemente cómo aplicarías la visión de "cómo enseñar y aprender" en tu contexto educativo actual.', feedback: 'Respuesta registrada. Adaptar el "cómo" al contexto es la esencia de la didáctica situada.' },
+    { questionType: 'visual', id: 'm1_q7', text: 'Observa la línea de tiempo. ¿Qué elemento marca la transición hacia la didáctica de la era digital?', imageUrl: 'mod1_timeline_didactica_1782025069823.png', options: ['La tiza y el pizarrón', 'El constructivismo', 'La integración TIC', 'La Didáctica Magna'], correctIndex: 2, feedback: 'La integración TIC es el hito de la didáctica moderna.' },
+    { questionType: 'visual', id: 'm1_q8', text: 'En el diagrama, ¿qué concepto conecta directamente a la didáctica como el "cómo enseñar"?', imageUrl: 'mod1_relacion_didactica_1782025079061.png', options: ['La Psicología', 'La Pedagogía y la Educación', 'La Filosofía', 'La Administración'], correctIndex: 1, feedback: 'La didáctica es una rama de la pedagogía aplicada a la educación.' }
   ],
   questions_phase_2: [
-    {
-      id: 'q1', text: 'El modelo TPACK integra tres tipos de conocimiento. ¿Cuáles son?',
-      options: ['Científico, administrativo y financiero', 'Disciplinar (contenido), pedagógico y tecnológico', 'Curricular, evaluativo y normativo'],
-      correctIndex: 1, feedback: 'TPACK = Technological, Pedagogical And Content Knowledge.'
-    },
-    {
-      id: 'q2', text: '¿Por qué es relevante aplicar TPACK en las prácticas de aula de docentes en ejercicio?',
-      options: ['Porque permite lograr una enseñanza efectiva mediada con tecnología', 'Porque elimina la necesidad de planificación pedagógica'],
-      correctIndex: 0, feedback: 'TPACK busca una enseñanza efectiva que combine los tres saberes.'
-    }
+    { questionType: 'single', id: 'm2_q1', text: 'El enfoque Blended-learning (b-learning) se caracteriza por:', options: ['Ser 100% virtual', 'Combinar presencialidad con recursos digitales', 'Eliminar las evaluaciones', 'Ser 100% presencial'], correctIndex: 1, feedback: 'Correcto, el b-learning mezcla lo mejor de ambos mundos.' },
+    { questionType: 'single', id: 'm2_q2', text: '¿Cuál es el objetivo de transformar el aula tradicional en un Laboratorio de Innovación Didáctica?', options: ['Reducir el salario docente', 'Aumentar las vacaciones', 'Promover la investigación formativa y colaborativa', 'Limitar el uso de internet'], correctIndex: 2, feedback: 'El objetivo es crear un espacio activo y de experimentación.' },
+    { questionType: 'multiple', id: 'm2_q3', text: 'Selecciona las estrategias de aprendizaje activo mencionadas en la unidad (Selecciona varias):', options: ['Aprendizaje Basado en Proyectos (ABPr)', 'Aprendizaje Basado en Problemas (ABP)', 'Clase Magistral pasiva', 'Aprendizaje Basado en Casos (ABC)', 'Dictado tradicional'], correctIndexes: [0, 1, 3], feedback: 'ABPr, ABP y ABC son pilares metodológicos del aprendizaje activo.' },
+    { questionType: 'multiple', id: 'm2_q4', text: 'Beneficios del b-learning (Selecciona varias):', options: ['Flexibilidad de tiempo', 'Menor interacción social', 'Personalización del aprendizaje', 'Dependencia total de la presencialidad'], correctIndexes: [0, 2], feedback: 'Aporta flexibilidad y personalización sin perder el contacto humano.' },
+    { questionType: 'open', id: 'm2_q5', text: '¿Cómo diseñarías una secuencia didáctica que articule el Aprendizaje Basado en Proyectos (ABPr)?', feedback: 'Respuesta registrada. El diseño debe incluir fases claras de planificación, ejecución y evaluación.' },
+    { questionType: 'open', id: 'm2_q6', text: 'Menciona un reto de implementar Blended-learning en tu institución y cómo lo superarías.', feedback: 'Respuesta registrada. Identificar barreras como la conectividad o la capacitación es el primer paso.' },
+    { questionType: 'visual', id: 'm2_q7', text: 'Según la tabla comparativa, ¿cuál es el rol principal del docente en el ABP y ABPr?', imageUrl: 'mod2_comparacion_abp_1782025090913.png', options: ['Transmisor de información', 'Guía y facilitador', 'Observador pasivo', 'Evaluador estricto'], correctIndex: 1, feedback: 'El docente actúa como guía, mediando el proceso de descubrimiento.' },
+    { questionType: 'visual', id: 'm2_q8', text: 'En el diagrama de B-learning, ¿qué dos esferas se equilibran?', imageUrl: 'mod2_blended_learning_1782025138183.png', options: ['Padres y Alumnos', 'Aula Presencial y Plataformas Virtuales', 'Teoría y Práctica', 'Juegos y Tareas'], correctIndex: 1, feedback: 'El b-learning equilibra lo presencial con lo virtual.' }
   ],
-  checklists_phase_3: [
-    { text: 'Se identifica si la estrategia es ABPr, ABP o ABC y se justifica la elección' },
-    { text: 'Se indica si la solución es presencial, virtual o b-learning' },
-    { text: 'Se elige al menos una herramienta TIC del repertorio visto (MOOC, webinar, Flipped Room, RA, gamificación, Wow Room)' }
+  questions_phase_3: [
+    { questionType: 'single', id: 'm3_q1', text: '¿Qué significan las siglas TPACK?', options: ['Tecnología, Pedagogía y Contenido', 'Teoría Práctica Actualizada', 'Técnicas Pedagógicas Administrativas', 'Test de Prueba Académica'], correctIndex: 0, feedback: 'Technological Pedagogical Content Knowledge.' },
+    { questionType: 'single', id: 'm3_q2', text: 'En el modelo TPACK, el conocimiento disciplinar o del contenido (CK) se refiere a:', options: ['Saber usar Excel', 'Saber cómo gestionar el aula', 'Saber QUÉ enseñar (la materia específica)', 'Saber evaluar'], correctIndex: 2, feedback: 'El CK es el dominio de la materia que se va a impartir.' },
+    { questionType: 'multiple', id: 'm3_q3', text: '¿Qué intersecciones existen dentro del modelo TPACK? (Selecciona varias)', options: ['Conocimiento Pedagógico del Contenido (PCK)', 'Conocimiento Tecnológico del Contenido (TCK)', 'Conocimiento Financiero (FCK)', 'Conocimiento Tecnológico Pedagógico (TPK)'], correctIndexes: [0, 1, 3], feedback: 'PCK, TCK y TPK son las intersecciones clave del modelo.' },
+    { questionType: 'multiple', id: 'm3_q4', text: 'El modelo TPACK busca lograr: (Selecciona varias)', options: ['Una enseñanza efectiva mediada por tecnología', 'Reemplazar al docente por computadoras', 'Integrar saberes fragmentados', 'Usar tecnología solo por moda'], correctIndexes: [0, 2], feedback: 'Busca una integración profunda y con sentido pedagógico.' },
+    { questionType: 'open', id: 'm3_q5', text: 'Da un ejemplo de cómo integrarías el conocimiento tecnológico, pedagógico y de contenido en una clase tuya.', feedback: 'Respuesta registrada. Un buen ejemplo une una herramienta TIC con una estrategia activa y un tema curricular.' },
+    { questionType: 'open', id: 'm3_q6', text: '¿Cuál crees que es el mayor obstáculo para que los docentes alcancen el centro del modelo TPACK?', feedback: 'Respuesta registrada. La falta de formación técnica o pedagógica suele ser la barrera común.' },
+    { questionType: 'visual', id: 'm3_q7', text: 'Observa el diagrama de Venn TPACK. ¿Dónde se encuentra la enseñanza efectiva con TIC?', imageUrl: 'mod3_tpack_venn_1782025149297.png', options: ['En el círculo de Contenido', 'En la intersección central de los 3 círculos', 'Fuera de los círculos', 'En el círculo de Tecnología'], correctIndex: 1, feedback: 'El punto óptimo (TPACK) está en la convergencia de los tres saberes.' },
+    { questionType: 'visual', id: 'm3_q8', text: 'En el ejemplo de integración TPACK, ¿qué elemento representa el Conocimiento Tecnológico (TK)?', imageUrl: 'mod3_tpack_integration_1782025158211.png', options: ['La simulación interactiva', 'El aprendizaje por indagación', 'Los conceptos de física', 'El estudiante'], correctIndex: 0, feedback: 'La herramienta digital elegida (simulación) es el componente tecnológico.' }
+  ],
+  questions_phase_4: [
+    { questionType: 'single', id: 'm4_q1', text: '¿Cuál es el rol del estudiante en las estrategias didácticas activas?', options: ['Receptor pasivo', 'Protagonista activo de su aprendizaje', 'Espectador', 'Evaluador exclusivo'], correctIndex: 1, feedback: 'Las metodologías activas sitúan al alumno en el centro.' },
+    { questionType: 'single', id: 'm4_q2', text: 'El Aprendizaje Basado en Casos (ABC) se enfoca principalmente en:', options: ['Desarrollar productos físicos', 'Analizar situaciones complejas de la vida real', 'Memorizar fechas históricas', 'Aprobar exámenes estandarizados'], correctIndex: 1, feedback: 'El ABC utiliza narrativas o situaciones reales para el análisis profundo.' },
+    { questionType: 'multiple', id: 'm4_q3', text: 'Competencias de orden superior que desarrollan estas estrategias: (Selecciona varias)', options: ['Pensamiento crítico', 'Copia literal de textos', 'Resolución de problemas', 'Trabajo colaborativo', 'Aislamiento social'], correctIndexes: [0, 2, 3], feedback: 'Fomentan el pensamiento crítico, la resolución y la colaboración.' },
+    { questionType: 'multiple', id: 'm4_q4', text: 'Diferencias entre ABP (Problemas) y ABPr (Proyectos): (Selecciona varias)', options: ['El ABPr suele terminar en un producto final o entregable', 'Son exactamente lo mismo', 'El ABP parte de una pregunta o escenario abierto', 'El ABPr no requiere investigación'], correctIndexes: [0, 2], feedback: 'El ABPr busca un producto, mientras el ABP se centra en el proceso de resolver el escenario.' },
+    { questionType: 'open', id: 'm4_q5', text: 'Describe cómo aplicarías la inclusión y diversidad dentro de un Aprendizaje Basado en Proyectos.', feedback: 'Respuesta registrada. Asignar roles rotativos y permitir múltiples formas de representación es clave.' },
+    { questionType: 'open', id: 'm4_q6', text: 'Plantea una "pregunta detonante" o "problema inicial" para tu asignatura usando la metodología ABP.', feedback: 'Respuesta registrada. Las buenas preguntas ABP son abiertas, reales y complejas.' },
+    { questionType: 'visual', id: 'm4_q7', text: 'En la infografía de roles, ¿qué actitudes se asocian al estudiante activo?', imageUrl: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&q=80&w=800', options: ['Silencio absoluto', 'Investigador, colaborador y solucionador', 'Competitividad agresiva', 'Dependencia del docente'], correctIndex: 1, feedback: 'El estudiante asume roles de liderazgo en su propio aprendizaje.' },
+    { questionType: 'visual', id: 'm4_q8', text: 'En el mapa conceptual, ¿hacia dónde convergen el ABPr, ABP y ABC?', imageUrl: 'https://images.unsplash.com/photo-1516321497487-e288fb19713f?auto=format&fit=crop&q=80&w=800', options: ['Al examen final', 'Al aburrimiento', 'Al desarrollo de Competencias Superiores', 'Al libro de texto'], correctIndex: 2, feedback: 'Todas estas estrategias apuntan al desarrollo de competencias críticas.' }
   ],
   questions_phase_5: [
-    {
-      id: 'q1', text: '¿Qué unidad del curso (I-V) consideras que aportó más a tu propuesta, y por qué? (Para este demo, selecciona cualquiera)',
-      options: ['Unidad I', 'Unidad II', 'Unidad III', 'Unidad V'],
-      correctIndex: 3, feedback: 'Excelente reflexión. (Esta fase en producción sería abierta sin calificación estricta).'
-    }
+    { questionType: 'single', id: 'm5_q1', text: '¿Qué es el modelo "Flipped Classroom" (Aula Invertida)?', options: ['Dar clase de pie', 'Ver teoría en casa y hacer la práctica en clase', 'Hacer exámenes sorpresa todos los días', 'Usar tablets para jugar'], correctIndex: 1, feedback: 'Invierte el orden tradicional, aprovechando el tiempo de clase para aplicar el conocimiento.' },
+    { questionType: 'single', id: 'm5_q2', text: 'La Gamificación en el aula consiste en:', options: ['Jugar videojuegos todo el día', 'Aplicar mecánicas de juego en entornos no lúdicos (educación)', 'Dar tiempo libre', 'Eliminar las calificaciones'], correctIndex: 1, feedback: 'Usa elementos como puntos, niveles o insignias para motivar el aprendizaje.' },
+    { questionType: 'multiple', id: 'm5_q3', text: 'Selecciona herramientas TIC mencionadas para innovar en el aula (Selecciona varias):', options: ['MOOCs', 'Máquina de escribir', 'Realidad Aumentada (RA)', 'Webinars', 'Wow Room'], correctIndexes: [0, 2, 3, 4], feedback: 'Las TIC modernas permiten interacciones inmersivas y masivas.' },
+    { questionType: 'multiple', id: 'm5_q4', text: 'Impacto positivo de las TIC en el proceso de enseñanza (Selecciona varias):', options: ['Reconfiguran el modelo tradicional', 'Promueven ambientes innovadores', 'Reducen la motivación', 'Facilitan el acceso a la información'], correctIndexes: [0, 1, 3], feedback: 'Cambian el paradigma, motivan y democratizan el saber.' },
+    { questionType: 'open', id: 'm5_q5', text: 'Explica cómo usarías la Realidad Aumentada (RA) para enseñar un concepto complejo de tu área.', feedback: 'Respuesta registrada. La RA permite visualizar modelos 3D interactivos, ideal para ciencias o anatomía.' },
+    { questionType: 'open', id: 'm5_q6', text: 'Escribe una reflexión final: ¿Cómo esta Hackatón Pedagógica transformó tu visión de la innovación didáctica?', feedback: 'Respuesta registrada. ¡Felicidades por llegar al final de la hackatón!' },
+    { questionType: 'visual', id: 'm5_q7', text: 'En el collage de herramientas TIC, ¿qué representa la interacción síncrona a distancia?', imageUrl: 'https://images.unsplash.com/photo-1588196749597-9ff075ee6b5b?auto=format&fit=crop&q=80&w=800', options: ['Gamificación', 'Webinars / Videoconferencias', 'MOOC asíncrono', 'Libro digital'], correctIndex: 1, feedback: 'Los webinars permiten la interacción en tiempo real desde cualquier lugar.' },
+    { questionType: 'visual', id: 'm5_q8', text: 'En el diagrama de Aula Invertida, ¿qué se realiza "En Casa"?', imageUrl: 'https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&q=80&w=800', options: ['El trabajo colaborativo grupal', 'Resolución de dudas complejas', 'La asimilación de teoría a través de videos/lecturas', 'El examen final'], correctIndex: 2, feedback: 'En casa se consume el contenido teórico para liberar la clase presencial.' }
   ]
 };

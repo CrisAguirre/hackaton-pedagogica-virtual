@@ -231,8 +231,8 @@ a {
   padding: 0 20px;
 }
 
-/* ===== SHOOTING STARS BACKGROUND ===== */
-.stars-container {
+/* ===== FLOATING EDU BACKGROUND ===== */
+.edu-background-container {
   position: fixed;
   top: 0;
   left: 0;
@@ -241,47 +241,26 @@ a {
   z-index: -1;
   overflow: hidden;
   pointer-events: none;
+  background: radial-gradient(circle at center, #0a1122 0%, #060d1a 100%);
 }
 
-.shooting-star {
+.floating-char {
   position: absolute;
-  width: 2px;
-  height: 2px;
-  background: transparent;
-  animation: falling-star 4s linear infinite;
-  opacity: 0;
+  bottom: -100px;
+  color: rgba(79, 195, 247, 0.15); /* Celeste semi-transparente */
+  font-family: 'Inter', sans-serif;
+  font-weight: 800;
+  font-size: 30px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5), 0 0 10px rgba(79, 195, 247, 0.2);
+  transform: translateZ(0); /* Hardware acceleration */
+  animation: floatUp linear infinite;
+  user-select: none;
 }
 
-/* The tail */
-.shooting-star::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  right: 0;
-  transform: translateY(-50%);
-  width: 150px;
-  height: 3px;
-  background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.7) 100%);
-  border-radius: 100%;
-}
-
-/* The head */
-.shooting-star::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  right: 0;
-  transform: translateY(-50%);
-  width: 5px;
-  height: 5px;
-  background: #fff;
-  border-radius: 50%;
-  box-shadow: 0 0 10px rgba(79, 195, 247, 1), 0 0 20px rgba(79, 195, 247, 0.8);
-}
-
-@keyframes falling-star {
+/* Animación para subir, rotar y desvanecerse */
+@keyframes floatUp {
   0% {
-    transform: rotate(135deg) translateX(0);
+    transform: translateY(0) rotate(0deg) scale(0.8);
     opacity: 0;
   }
   15% {
@@ -291,21 +270,10 @@ a {
     opacity: 1;
   }
   100% {
-    transform: rotate(135deg) translateX(150vw);
+    transform: translateY(-120vh) rotate(360deg) scale(1.2);
     opacity: 0;
   }
 }
-
-.shooting-star:nth-child(1) { top: 0%; left: 50%; animation-delay: 0s; animation-duration: 4s; }
-.shooting-star:nth-child(2) { top: -20%; left: 80%; animation-delay: 1.2s; animation-duration: 3s; }
-.shooting-star:nth-child(3) { top: -10%; left: 110%; animation-delay: 2.5s; animation-duration: 3.5s; }
-.shooting-star:nth-child(4) { top: 20%; left: 120%; animation-delay: 0.8s; animation-duration: 4.2s; }
-.shooting-star:nth-child(5) { top: 10%; left: 70%; animation-delay: 3.1s; animation-duration: 3.8s; }
-.shooting-star:nth-child(6) { top: -30%; left: 90%; animation-delay: 1.8s; animation-duration: 3.2s; }
-.shooting-star:nth-child(7) { top: 30%; left: 130%; animation-delay: 0.5s; animation-duration: 4.5s; }
-.shooting-star:nth-child(8) { top: 50%; left: 110%; animation-delay: 2.1s; animation-duration: 3.6s; }
-.shooting-star:nth-child(9) { top: -40%; left: 60%; animation-delay: 3.5s; animation-duration: 3.1s; }
-.shooting-star:nth-child(10) { top: 40%; left: 140%; animation-delay: 1.5s; animation-duration: 4.1s; }
 
 /* Custom Form Elements Globals */
 input, select, textarea {

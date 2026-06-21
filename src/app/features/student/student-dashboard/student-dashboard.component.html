@@ -45,19 +45,65 @@
         <button class="btn-primary" style="max-width: 200px;" (click)="phases[1].status = 'unlocked'; openPhase(phases[1])">Empezar Hackatón →</button>
       </div>
 
-      <!-- Content: Quiz -->
+      <!-- Content: Quiz (All 4 types) -->
       <div *ngIf="selectedPhase.type === 'quiz'">
         <div *ngIf="!phaseCompleted">
-          <div class="question-block" *ngFor="let q of questions; let qIndex = index">
-            <p class="question-text">{{ qIndex + 1 }}. {{ q.text }}</p>
-            <div class="options">
+          <div class="question-block" *ngFor="let q of questions; let qIndex = index" style="background: var(--bg-card); padding: 20px; border-radius: 8px; margin-bottom: 25px; border: 1px solid var(--bg-medium);">
+            
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+              <p class="question-text" style="font-weight: 700; font-size: 16px; margin: 0;">{{ qIndex + 1 }}. {{ q.text }}</p>
+              <span style="font-size: 12px; background: rgba(79, 195, 247, 0.15); color: var(--accent-primary); padding: 4px 8px; border-radius: 4px;">
+                {{ q.questionType === 'single' ? 'Selección Única' : q.questionType === 'multiple' ? 'Selección Múltiple' : q.questionType === 'open' ? 'Respuesta Abierta' : 'Análisis Visual' }}
+              </span>
+            </div>
+
+            <!-- Single Choice -->
+            <div class="options" style="display: flex; flex-direction: column; gap: 10px;" *ngIf="q.questionType === 'single'">
               <button *ngFor="let opt of q.options; let aIndex = index"
                       class="option-btn"
+                      style="padding: 12px; background: var(--bg-medium); border: 1px solid transparent; color: var(--text-light); border-radius: 4px; cursor: pointer; text-align: left; transition: 0.2s;"
                       [class.selected]="currentAnswers[qIndex] === aIndex"
+                      [style.borderColor]="currentAnswers[qIndex] === aIndex ? 'var(--accent-primary)' : 'transparent'"
+                      [style.color]="currentAnswers[qIndex] === aIndex ? 'var(--accent-primary)' : 'var(--text-light)'"
                       (click)="selectAnswer(qIndex, aIndex)">
                 {{ opt }}
               </button>
             </div>
+
+            <!-- Multiple Choice -->
+            <div class="options" style="display: flex; flex-direction: column; gap: 10px;" *ngIf="q.questionType === 'multiple'">
+              <div *ngFor="let opt of q.options; let aIndex = index"
+                   style="display: flex; align-items: center; gap: 12px; padding: 12px; background: var(--bg-medium); border-radius: 4px; cursor: pointer; border: 1px solid transparent; transition: 0.2s;"
+                   [style.borderColor]="multipleAnswers[qIndex][aIndex] ? 'var(--accent-primary)' : 'transparent'"
+                   (click)="toggleMultipleAnswer(qIndex, aIndex)">
+                <input type="checkbox" style="width: 18px; height: 18px; accent-color: var(--accent-primary); pointer-events: none;" [checked]="multipleAnswers[qIndex][aIndex]">
+                <label style="color: var(--text-light); cursor: pointer; pointer-events: none;">{{ opt }}</label>
+              </div>
+            </div>
+
+            <!-- Open Question -->
+            <div class="options" *ngIf="q.questionType === 'open'">
+              <textarea [(ngModel)]="openAnswers[qIndex]" rows="4" style="width:100%; padding: 12px; background: var(--bg-dark); color: var(--text-white); border: 1px solid var(--bg-medium); border-radius: 6px; outline:none; font-family: inherit;" placeholder="Escribe tu respuesta argumentada aquí..."></textarea>
+            </div>
+
+            <!-- Visual Question -->
+            <div class="options" *ngIf="q.questionType === 'visual'">
+              <div style="text-align: center; margin-bottom: 20px;">
+                <img [src]="q.imageUrl" alt="Recurso visual" style="max-width: 100%; max-height: 300px; border-radius: 8px; border: 1px solid var(--bg-medium);">
+              </div>
+              <div style="display: flex; flex-direction: column; gap: 10px;">
+                <button *ngFor="let opt of q.options; let aIndex = index"
+                        class="option-btn"
+                        style="padding: 12px; background: var(--bg-medium); border: 1px solid transparent; color: var(--text-light); border-radius: 4px; cursor: pointer; text-align: left; transition: 0.2s;"
+                        [class.selected]="currentAnswers[qIndex] === aIndex"
+                        [style.borderColor]="currentAnswers[qIndex] === aIndex ? 'var(--accent-primary)' : 'transparent'"
+                        [style.color]="currentAnswers[qIndex] === aIndex ? 'var(--accent-primary)' : 'var(--text-light)'"
+                        (click)="selectAnswer(qIndex, aIndex)">
+                  {{ opt }}
+                </button>
+              </div>
+            </div>
+
           </div>
           <div style="text-align: center;">
             <button class="btn-primary" style="max-width: 250px; margin-top: 20px;" (click)="submitPhase()">Enviar Respuestas</button>
@@ -65,46 +111,11 @@
         </div>
       </div>
 
-      <!-- Content: Checklist -->
-      <div *ngIf="selectedPhase.type === 'checklist'">
-        <div *ngIf="!phaseCompleted">
-          <p style="margin-bottom: 20px;">Por favor, verifica que tu propuesta cumpla con los siguientes criterios de metodología y TIC:</p>
-          <div class="question-block" *ngFor="let item of checklistItems; let i = index" style="display:flex; align-items:center; gap: 15px;">
-            <input type="checkbox" style="width:20px;height:20px;" [checked]="checklistAnswers[i]" (change)="toggleChecklist(i)">
-            <label>{{ item.text }}</label>
-          </div>
-          <div style="text-align: center;">
-            <button class="btn-primary" style="max-width: 250px; margin-top: 20px;" (click)="submitPhase()">Confirmar Checklist</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Content: Upload (Text/URL) -->
-      <div *ngIf="selectedPhase.type === 'upload'">
-        <div *ngIf="!phaseCompleted">
-          <p style="margin-bottom: 20px;">Entrega tu propuesta final basándote en la rúbrica.</p>
-          
-          <div class="input-group">
-            <label>URL de la Propuesta (Opcional)</label>
-            <input type="text" [(ngModel)]="deliveryUrl" placeholder="https://ejemplo.com/mi-propuesta">
-          </div>
-          
-          <div class="input-group">
-            <label>Descripción / Justificación</label>
-            <textarea [(ngModel)]="deliveryText" rows="5" style="width:100%; padding: 10px; background: var(--bg-dark); color: inherit; border: 1px solid var(--bg-medium); border-radius: 6px; outline:none;" placeholder="Escribe tu justificación aquí..."></textarea>
-          </div>
-
-          <div style="text-align: center;">
-            <button class="btn-primary" style="max-width: 250px; margin-top: 20px;" (click)="submitPhase()">Entregar Propuesta</button>
-          </div>
-        </div>
-      </div>
-
       <!-- Common Results Block (shown after submit) -->
       <div *ngIf="phaseCompleted && selectedPhase.type !== 'info'" class="results-block animate-slide-down" style="margin-top:30px;">
         <h3 style="color: var(--color-success); text-align: center;">¡Entregado! Puntaje: {{ score | number:'1.0-0' }}%</h3>
-        <p *ngIf="score !== null && score >= 70" style="text-align: center; margin-top: 10px;">Has completado el módulo con éxito.</p>
-        <p *ngIf="score !== null && score < 70" style="color:var(--color-danger); text-align: center; margin-top: 10px;">No has alcanzado el 70% necesario. ¡Intenta de nuevo!</p>
+        <p *ngIf="score !== null && score >= 70" style="text-align: center; margin-top: 10px;">Has superado el cuestionario con éxito.</p>
+        <p *ngIf="score !== null && score < 70" style="color:var(--color-danger); text-align: center; margin-top: 10px;">No has alcanzado el 70% necesario. ¡Intenta de nuevo o revisa el material!</p>
         
         <div *ngIf="selectedPhase.type === 'quiz'" style="margin-top: 20px;">
           <div class="feedback-item" *ngFor="let q of questions; let i = index" style="margin-top: 10px; background: var(--bg-dark); padding: 15px; border-radius: 6px; border-left: 3px solid var(--accent-secondary);">
