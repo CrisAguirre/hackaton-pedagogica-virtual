@@ -48,8 +48,19 @@ export class AdminDashboardComponent implements OnInit {
     this.openPhase(this.selectedPhase);
   }
 
+  toastMessage: string | null = null;
+
+  showToast(message: string) {
+    this.toastMessage = message;
+    setTimeout(() => {
+      this.toastMessage = null;
+    }, 3000);
+  }
+
   openPhase(phase: any) {
-    if (phase.type === 'info') return;
+    if (phase.status === 'locked') {
+      this.showToast('Nota para el docente: Los estudiantes verán este módulo bloqueado hasta que completen el anterior.');
+    }
     this.activeView = 'content';
     this.selectedPhase = phase;
     this.phaseCompleted = false;
@@ -75,7 +86,7 @@ export class AdminDashboardComponent implements OnInit {
   }
 
   submitPhase() {
-    alert("Modo vista de profesor. Envío desactivado.");
+    this.showToast("Modo vista de profesor. Envío de resultados desactivado.");
   }
 
   showResults() {

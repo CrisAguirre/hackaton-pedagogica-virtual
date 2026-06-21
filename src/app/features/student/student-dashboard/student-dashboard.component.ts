@@ -43,9 +43,18 @@ export class StudentDashboardComponent implements OnInit {
     this.openPhase(this.phases[0]);
   }
 
+  toastMessage: string | null = null;
+
+  showToast(message: string) {
+    this.toastMessage = message;
+    setTimeout(() => {
+      this.toastMessage = null;
+    }, 3000);
+  }
+
   openPhase(phase: any) {
     if (phase.status === 'locked') {
-      alert('Este módulo está bloqueado. Completa el anterior primero.');
+      this.showToast('Este módulo está bloqueado. Completa el anterior con éxito para avanzar.');
       return;
     }
     this.selectedPhase = phase;
