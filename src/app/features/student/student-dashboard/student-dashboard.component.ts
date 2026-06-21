@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../core/services/auth.service';
 import { ThemeService } from '../../../core/services/theme.service';
+import { HackatonService } from '../../../core/services/hackaton.service';
 import { HACKATON_DATA } from '../../../core/data/hackaton-data';
 
 @Component({
@@ -40,7 +41,8 @@ export class StudentDashboardComponent implements OnInit {
 
   constructor(
     private authService: AuthService, 
-    private router: Router
+    private router: Router,
+    private hackatonService: HackatonService
   ) {}
 
   openZoom(url: string) {
@@ -124,16 +126,35 @@ export class StudentDashboardComponent implements OnInit {
       });
 
       this.score = (correct / totalWeight) * 100;
-    }
+      
+      const payload = {
+        phase: this.selectedPhase.id,
+        score: this.score,
+        answers: {
+          single: this.currentAnswers,
+          multiple: this.multipleAnswers,
+          open: this.openAnswers
+        }
+      };
 
-    this.phaseCompleted = true;
-
-    // Desbloquear siguiente fase
-    if (this.score !== null && this.score >= 70) {
-      const nextPhaseIndex = this.phases.findIndex(p => p.id === this.selectedPhase.id) + 1;
-      if (nextPhaseIndex < this.phases.length) {
-        this.phases[nextPhaseIndex].status = 'unlocked';
-      }
+      this.hackatonService.submitPhase(payload).subscribe({
+        next: (res) => {
+          this.phaseCompleted = true;
+          // Desbloquear siguiente fase
+          if (this.score !== null && this.score >= 70) {
+            const nextPhaseIndex = this.phases.findIndex(p => p.id === this.selectedPhase.id) + 1;
+            if (nextPhaseIndex < this.phases.length) {
+              this.phases[nextPhaseIndex].status = 'unlocked';
+            }
+          }
+        },
+        error: (err) => {
+          console.error(err);
+          this.showToast('Error de red al guardar resultados. Intenta de nuevo.');
+        }
+      });
+    } else {
+      this.phaseCompleted = true;
     }
   }
 

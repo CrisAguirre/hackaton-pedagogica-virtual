@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../core/services/auth.service';
 import { ThemeService } from '../../../core/services/theme.service';
+import { HackatonService } from '../../../core/services/hackaton.service';
 import { HACKATON_DATA } from '../../../core/data/hackaton-data';
 
 @Component({
@@ -14,11 +15,7 @@ export class AdminDashboardComponent implements OnInit {
   selectedPhase: any = null;
   phases: any[] = [];
   
-  submissions = [
-    { student: 'Ana G.', phase: 1, score: 85, submittedAt: new Date('2026-06-20T10:00') },
-    { student: 'Carlos M.', phase: 1, score: 60, submittedAt: new Date('2026-06-20T11:30') },
-    { student: 'Luis P.', phase: 2, score: null, submittedAt: new Date('2026-06-21T09:15') }
-  ];
+  submissions: any[] = [];
   questions: any[] = [];
   currentAnswers: number[] = [];
   multipleAnswers: boolean[][] = [];
@@ -44,7 +41,8 @@ export class AdminDashboardComponent implements OnInit {
 
   constructor(
     private authService: AuthService, 
-    private router: Router
+    private router: Router,
+    private hackatonService: HackatonService
   ) {}
 
   openZoom(url: string) {
@@ -59,8 +57,28 @@ export class AdminDashboardComponent implements OnInit {
     this.phases = HACKATON_DATA.phases;
     this.selectedPhase = this.phases[0]; // Start at info/home by default
     
+    this.loadSubmissions();
+    
     // Simulate loading the selected phase
     this.openPhase(this.selectedPhase);
+  }
+
+  loadSubmissions() {
+    this.hackatonService.getSubmissions().subscribe({
+      next: (data) => {
+        // Map data from DB to UI format
+        this.submissions = data.map(sub => ({
+          student: sub.userId?.username || 'Estudiante',
+          phase: sub.phase,
+          score: sub.score,
+          submittedAt: new Date(sub.submittedAt)
+        }));
+      },
+      error: (err) => {
+        console.error('Error loading submissions', err);
+        this.showToast('Error cargando los registros.');
+      }
+    });
   }
 
   toastMessage: string | null = null;
@@ -113,6 +131,7 @@ export class AdminDashboardComponent implements OnInit {
     
     this.activeView = 'results';
     this.selectedPhase = null;
+    this.loadSubmissions();
   }
 
   logout() {

@@ -318,7 +318,7 @@ a {
 .main-content-wrapper {
   max-width: 1200px;
   margin: 40px auto;
-  padding: 0 20px;
+  padding: 0 20px 80px 20px;
 }
 
 /* ===== FLOATING EDU BACKGROUND ===== */
